@@ -1,0 +1,229 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <title>Aurelia Omondi | Business Information Technology</title>
+  <meta name="description" content="Fourth-year Business Information Technology student in Nairobi, looking for an internship or attachment.">
+
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:wght@500;800&display=swap" rel="stylesheet">
+
+  <style>
+    /* Colors live in one place. Change them here and the whole site updates. */
+    :root {
+      --bg: #1f1519;
+      --ink: #f1e6ea;
+      --muted: #b9a8af;
+      --accent: #c4607a;
+      --card: #2b1f25;
+      --line: #42303a;
+    }
+
+    * { box-sizing: border-box; margin: 0; }
+
+    body {
+      font-family: system-ui, -apple-system, "Segoe UI", sans-serif;
+      background: var(--bg);
+      color: var(--ink);
+      line-height: 1.6;
+    }
+
+    h1, h2, h3 { font-family: "Bricolage Grotesque", system-ui, sans-serif; line-height: 1.1; }
+
+    .wrap { max-width: 760px; margin: 0 auto; padding: 0 1.25rem; }
+
+    nav { padding: 1.25rem 0; }
+    nav .wrap { display: flex; gap: 1.25rem; justify-content: flex-end; flex-wrap: wrap; }
+    nav a { color: var(--muted); text-decoration: none; }
+    nav a:hover { color: var(--accent); }
+
+    .hero { padding: 3.5rem 0 2.5rem; }
+    .hero h1 { font-size: clamp(2.5rem, 9vw, 4.5rem); font-weight: 800; }
+    .hero p { margin-top: 1.25rem; font-size: 1.15rem; color: var(--muted); max-width: 36rem; }
+
+    .buttons { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.75rem; }
+    .button {
+      display: inline-block; padding: .8rem 1.4rem;
+      background: var(--accent); color: #fff; text-decoration: none;
+      border-radius: 8px; font-weight: 600; border: 2px solid var(--accent);
+    }
+    .button:hover { background: #a84d66; border-color: #a84d66; }
+    .button.outline { background: transparent; color: var(--accent); }
+    .button.outline:hover { background: var(--accent); color: #fff; }
+
+    section { padding: 2.25rem 0; }
+    section h2 { font-size: 1.9rem; margin-bottom: 1.25rem; }
+
+    .skills-group { margin-bottom: 1.1rem; }
+    .skills-group h3 { font-size: 1rem; margin-bottom: .5rem; color: var(--muted); }
+    .skills { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; }
+    .skills li { background: #2a3a2e; border: 1px solid #3f5644; padding: .3rem .8rem; border-radius: 99px; font-size: .95rem; }
+
+    .item { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
+    .item h3 { font-size: 1.2rem; }
+    .item .meta { color: var(--muted); font-size: .9rem; margin: .2rem 0 .6rem; }
+    .item ul { padding-left: 1.2rem; color: var(--muted); }
+
+    .projects { display: grid; gap: 1rem; grid-template-columns: 1fr; }
+    @media (min-width: 640px) { .projects { grid-template-columns: 1fr 1fr; } }
+    .projects .item { margin-bottom: 0; }
+    .projects p { color: var(--muted); font-size: .95rem; }
+
+    a { color: var(--accent); }
+    a:focus-visible { outline: 3px solid var(--accent); outline-offset: 3px; }
+
+    footer { padding: 3rem 0; color: var(--muted); font-size: .9rem; }
+
+    /* Your photo: a neat circle */
+    .photo {
+      width: 150px;
+      height: 150px;
+      border-radius: 50%;
+      object-fit: cover;
+      border: 3px solid var(--accent);
+      margin-bottom: 1.25rem;
+    }
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="wrap">
+      <a href="#about">About</a>
+      <a href="#skills">Skills</a>
+      <a href="#experience">Experience</a>
+      <a href="#education">Education</a>
+      <a href="#projects">Projects</a>
+      <a href="#contact">Contact</a>
+    </div>
+  </nav>
+
+  <header class="hero">
+    <div class="wrap">
+      <img class="photo" src="photo.jpg" alt="Photo of Aurelia Omondi">
+      <h1>Hi, I'm Aurelia Omondi.</h1>
+      <p>I'm a fourth-year Business Information Technology student in Nairobi. I combine IT skills, office administration, and live media production, and I'm looking for an internship or attachment.</p>
+      <div class="buttons">
+        <a class="button" href="#contact">Get in touch</a>
+        <!-- Put your CV PDF in the same folder as this file for this link to work -->
+        <a class="button outline" href="Aurelia_Omondi_Resume.pdf">Download my CV</a>
+      </div>
+    </div>
+  </header>
+
+  <main>
+    <section id="about">
+      <div class="wrap">
+        <h2>About me</h2>
+        <p>I study Business Information Technology at Pan Africa Christian University. My coursework has covered systems analysis, database design, object-oriented and mobile application development, and business intelligence. I also have six months of hands-on administrative experience and I volunteer on a live media production team. I speak English, Kiswahili, and French.</p>
+      </div>
+    </section>
+
+    <section id="skills">
+      <div class="wrap">
+        <h2>Skills</h2>
+
+        <div class="skills-group">
+          <h3>IT and development</h3>
+          <ul class="skills">
+            <li>HTML</li><li>CSS</li><li>C++</li><li>Object-Oriented Programming</li>
+            <li>Database Systems Design</li><li>Systems Analysis &amp; Design</li>
+            <li>Mobile App Development</li><li>Web App Development</li>
+            <li>Business Intelligence</li><li>Network Security</li>
+          </ul>
+        </div>
+
+        <div class="skills-group">
+          <h3>Digital media</h3>
+          <ul class="skills">
+            <li>Live Streaming</li><li>Camera Operation</li><li>Basic Video Editing</li>
+            <li>Graphic Design</li><li>Social Media Management</li>
+          </ul>
+        </div>
+
+        <div class="skills-group">
+          <h3>Administration</h3>
+          <ul class="skills">
+            <li>MS Office</li><li>Data Entry</li><li>Records &amp; Documentation</li>
+            <li>Event Planning</li><li>Customer Service</li><li>Project Management</li>
+          </ul>
+        </div>
+      </div>
+    </section>
+
+    <section id="experience">
+      <div class="wrap">
+        <h2>Experience</h2>
+
+        <article class="item">
+          <h3>Administrator &amp; IT Assistant</h3>
+          <p class="meta">Clevers School, Jan 2024 to Jul 2024</p>
+          <ul>
+            <li>Supported daily office operations: data entry, filing, and appointments.</li>
+            <li>Handled customer inquiries and phone calls professionally.</li>
+            <li>Helped plan events and made promotional materials such as brochures and letters.</li>
+            <li>Maintained the school's database.</li>
+          </ul>
+        </article>
+
+        <article class="item">
+          <h3>Production / Media Team Volunteer</h3>
+          <p class="meta">Mavuno Church, 2023 to present</p>
+          <ul>
+            <li>Direct live streams and operate cameras during Sunday services and events.</li>
+            <li>Help keep broadcasts running smoothly for the online congregation.</li>
+            <li>Work in a team under live-event pressure.</li>
+          </ul>
+        </article>
+      </div>
+    </section>
+
+    <section id="education">
+      <div class="wrap">
+        <h2>Education</h2>
+        <article class="item">
+          <h3>Bachelor of Business Information Technology</h3>
+          <p class="meta">Pan Africa Christian University, 2025 to present (fourth year)</p>
+        </article>
+        <article class="item">
+          <h3>Diploma in Business Information Technology</h3>
+          <p class="meta">Management University of Africa, graduated Nov 2024</p>
+        </article>
+        <article class="item">
+          <h3>Certificate in Business Information Technology</h3>
+          <p class="meta">Management University of Africa, graduated Nov 2023</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="projects">
+      <div class="wrap">
+        <h2>Projects</h2>
+        <div class="projects">
+          <!-- Copy one of these blocks for each new project you build -->
+          <article class="item">
+            <h3>This website</h3>
+            <p>My personal site, built from scratch with HTML and CSS.</p>
+          </article>
+          <article class="item">
+            <h3>Your next project</h3>
+            <p>Add a class project here, such as a database system or mobile app, with a link to its GitHub page.</p>
+          </article>
+        </div>
+      </div>
+    </section>
+
+    <section id="contact">
+      <div class="wrap">
+        <h2>Contact</h2>
+        <p>Based in Nairobi, Kenya. Email me at <a href="mailto:Aureliabrazils29@gmail.com">Aureliabrazils29@gmail.com</a>.</p>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="wrap">&copy; 2026 Aurelia Omondi</div>
+  </footer>
+</body>
+</html>
