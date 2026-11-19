@@ -3,6 +3,7 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
+  <script>document.documentElement.classList.add("js");</script>
   <title>Aurelia Omondi | Business Information Technology</title>
   <meta name="description" content="Fourth-year Business Information Technology student in Nairobi, looking for an internship or attachment.">
 
@@ -18,6 +19,7 @@
       --accent: #c4607a;
       --card: #2b1f25;
       --line: #42303a;
+      --on-accent: #ffffff;
     }
 
     * { box-sizing: border-box; margin: 0; }
@@ -33,10 +35,43 @@
 
     .wrap { max-width: 760px; margin: 0 auto; padding: 0 1.25rem; }
 
-    nav { padding: 1.25rem 0; }
+    nav {
+      position: sticky; top: 0; z-index: 10; padding: .9rem 0;
+      background: color-mix(in srgb, var(--bg) 88%, transparent);
+      backdrop-filter: blur(8px);
+    }
     nav .wrap { display: flex; gap: 1.25rem; justify-content: flex-end; flex-wrap: wrap; }
-    nav a { color: var(--muted); text-decoration: none; }
-    nav a:hover { color: var(--accent); }
+    nav a { color: var(--muted); text-decoration: none; transition: color .2s ease; }
+    nav a:hover, nav a.active { color: var(--accent); }
+
+    /* Smooth scrolling when a menu link is clicked */
+    html { scroll-behavior: smooth; }
+    section { scroll-margin-top: 3rem; }
+
+    /* Thin progress line at the top showing how far down the page you are */
+    #progress {
+      position: fixed; top: 0; left: 0; height: 3px; width: 100%; z-index: 20;
+      background: var(--accent); transform: scaleX(0); transform-origin: left;
+    }
+
+    /* Scroll reveal: things ease in when they come into view */
+    .js .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease, border-color .8s ease, background-color .8s ease; }
+    .js .reveal.visible { opacity: 1; transform: none; }
+
+    /* Skill tags pop in one after another */
+    @keyframes pop { from { opacity: 0; transform: translateY(8px); } to { opacity: 1; transform: none; } }
+    .js .skills-group.visible li { animation: pop .45s ease both; animation-delay: calc(var(--i) * 60ms); }
+
+    /* Cards lift a little when you hover over them */
+    .js .item.visible:hover { transform: translateY(-4px); border-color: var(--accent); }
+
+    /* Respect people who prefer less motion */
+    @media (prefers-reduced-motion: reduce) {
+      html { scroll-behavior: auto; }
+      .js .reveal { opacity: 1; transform: none; transition: none; }
+      .js .skills-group.visible li { animation: none; }
+      #progress { display: none; }
+    }
 
     .hero { padding: 3.5rem 0 2.5rem; }
     .hero h1 { font-size: clamp(2.5rem, 9vw, 4.5rem); font-weight: 800; }
@@ -45,12 +80,12 @@
     .buttons { display: flex; gap: .75rem; flex-wrap: wrap; margin-top: 1.75rem; }
     .button {
       display: inline-block; padding: .8rem 1.4rem;
-      background: var(--accent); color: #fff; text-decoration: none;
+      background: var(--accent); color: var(--on-accent); text-decoration: none;
       border-radius: 8px; font-weight: 600; border: 2px solid var(--accent);
     }
-    .button:hover { background: #a84d66; border-color: #a84d66; }
+    .button:hover { filter: brightness(.9); }
     .button.outline { background: transparent; color: var(--accent); }
-    .button.outline:hover { background: var(--accent); color: #fff; }
+    .button.outline:hover { background: var(--accent); color: var(--on-accent); }
 
     section { padding: 2.25rem 0; }
     section h2 { font-size: 1.9rem; margin-bottom: 1.25rem; }
@@ -58,7 +93,7 @@
     .skills-group { margin-bottom: 1.1rem; }
     .skills-group h3 { font-size: 1rem; margin-bottom: .5rem; color: var(--muted); }
     .skills { display: flex; flex-wrap: wrap; gap: .5rem; list-style: none; padding: 0; }
-    .skills li { background: #2a3a2e; border: 1px solid #3f5644; padding: .3rem .8rem; border-radius: 99px; font-size: .95rem; }
+    .skills li { background: var(--card); border: 1px solid var(--line); padding: .3rem .8rem; border-radius: 99px; font-size: .95rem; }
 
     .item { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 1.25rem; margin-bottom: 1rem; }
     .item h3 { font-size: 1.2rem; }
@@ -84,10 +119,27 @@
       border: 3px solid var(--accent);
       margin-bottom: 1.25rem;
     }
+
+    /* Each section has its own color. The page blends from one to the next as you scroll. */
+    html[data-theme="about"]      { --bg:#12262b; --card:#1a3540; --line:#264a55; --accent:#3fc9b4; --on-accent:#0f1f1f; }
+    html[data-theme="skills"]     { --bg:#251c3a; --card:#33264f; --line:#4a3a70; --accent:#b794f6; --on-accent:#1a1230; }
+    html[data-theme="experience"] { --bg:#2f2214; --card:#402f1c; --line:#5c4529; --accent:#f2b04e; --on-accent:#2a1b08; }
+    html[data-theme="education"]  { --bg:#14281d; --card:#1d3a2a; --line:#2c5640; --accent:#6fdc8f; --on-accent:#0e2015; }
+    html[data-theme="projects"]   { --bg:#16213a; --card:#20305a; --line:#33477a; --accent:#6fa8ff; --on-accent:#0d1730; }
+    html[data-theme="contact"]    { --bg:#301525; --card:#43213a; --line:#5e3254; --accent:#ff7aa2; --on-accent:#2b0d1a; }
+
+    /* Colors blend smoothly instead of jumping */
+    body, nav, .item, .skills li, .button, .photo, a, #progress, footer {
+      transition: background-color .8s ease, border-color .8s ease, color .8s ease;
+    }
+    @media (prefers-reduced-motion: reduce) {
+      body, nav, .item, .skills li, .button, .photo, a, #progress, footer { transition: none; }
+    }
   </style>
 </head>
 
 <body>
+  <div id="progress"></div>
   <nav>
     <div class="wrap">
       <a href="#about">About</a>
@@ -115,16 +167,16 @@
   <main>
     <section id="about">
       <div class="wrap">
-        <h2>About me</h2>
-        <p>I study Business Information Technology at Pan Africa Christian University. My coursework has covered systems analysis, database design, object-oriented and mobile application development, and business intelligence. I also have six months of hands-on administrative experience and I volunteer on a live media production team. I speak English, Kiswahili, and French.</p>
+        <h2 class="reveal">About me</h2>
+        <p class="reveal">I study Business Information Technology at Pan Africa Christian University. My coursework has covered systems analysis, database design, object-oriented and mobile application development, and business intelligence. I also have six months of hands-on administrative experience and I volunteer on a live media production team. I speak English, Kiswahili, and French.</p>
       </div>
     </section>
 
     <section id="skills">
       <div class="wrap">
-        <h2>Skills</h2>
+        <h2 class="reveal">Skills</h2>
 
-        <div class="skills-group">
+        <div class="skills-group reveal">
           <h3>IT and development</h3>
           <ul class="skills">
             <li>HTML</li><li>CSS</li><li>C++</li><li>Object-Oriented Programming</li>
@@ -134,7 +186,7 @@
           </ul>
         </div>
 
-        <div class="skills-group">
+        <div class="skills-group reveal">
           <h3>Digital media</h3>
           <ul class="skills">
             <li>Live Streaming</li><li>Camera Operation</li><li>Basic Video Editing</li>
@@ -142,7 +194,7 @@
           </ul>
         </div>
 
-        <div class="skills-group">
+        <div class="skills-group reveal">
           <h3>Administration</h3>
           <ul class="skills">
             <li>MS Office</li><li>Data Entry</li><li>Records &amp; Documentation</li>
@@ -154,9 +206,9 @@
 
     <section id="experience">
       <div class="wrap">
-        <h2>Experience</h2>
+        <h2 class="reveal">Experience</h2>
 
-        <article class="item">
+        <article class="item reveal">
           <h3>Administrator &amp; IT Assistant</h3>
           <p class="meta">Clevers School, Jan 2024 to Jul 2024</p>
           <ul>
@@ -167,7 +219,7 @@
           </ul>
         </article>
 
-        <article class="item">
+        <article class="item reveal">
           <h3>Production / Media Team Volunteer</h3>
           <p class="meta">Mavuno Church, 2023 to present</p>
           <ul>
@@ -181,16 +233,16 @@
 
     <section id="education">
       <div class="wrap">
-        <h2>Education</h2>
-        <article class="item">
+        <h2 class="reveal">Education</h2>
+        <article class="item reveal">
           <h3>Bachelor of Business Information Technology</h3>
           <p class="meta">Pan Africa Christian University, 2025 to present (fourth year)</p>
         </article>
-        <article class="item">
+        <article class="item reveal">
           <h3>Diploma in Business Information Technology</h3>
           <p class="meta">Management University of Africa, graduated Nov 2024</p>
         </article>
-        <article class="item">
+        <article class="item reveal">
           <h3>Certificate in Business Information Technology</h3>
           <p class="meta">Management University of Africa, graduated Nov 2023</p>
         </article>
@@ -199,14 +251,14 @@
 
     <section id="projects">
       <div class="wrap">
-        <h2>Projects</h2>
+        <h2 class="reveal">Projects</h2>
         <div class="projects">
           <!-- Copy one of these blocks for each new project you build -->
-          <article class="item">
+          <article class="item reveal">
             <h3>This website</h3>
             <p>My personal site, built from scratch with HTML and CSS.</p>
           </article>
-          <article class="item">
+          <article class="item reveal">
             <h3>Your next project</h3>
             <p>Add a class project here, such as a database system or mobile app, with a link to its GitHub page.</p>
           </article>
@@ -216,8 +268,8 @@
 
     <section id="contact">
       <div class="wrap">
-        <h2>Contact</h2>
-        <p>Based in Nairobi, Kenya. Email me at <a href="mailto:Aureliabrazils29@gmail.com">Aureliabrazils29@gmail.com</a>.</p>
+        <h2 class="reveal">Contact</h2>
+        <p class="reveal">Based in Nairobi, Kenya. Email me at <a href="mailto:Aureliabrazils29@gmail.com">Aureliabrazils29@gmail.com</a>.</p>
       </div>
     </section>
   </main>
@@ -225,5 +277,59 @@
   <footer>
     <div class="wrap">&copy; 2026 Aurelia Omondi</div>
   </footer>
+
+  <script>
+    // Fade things in as they scroll into view
+    var reveals = document.querySelectorAll(".reveal");
+    if ("IntersectionObserver" in window) {
+      var io = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) { e.target.classList.add("visible"); io.unobserve(e.target); }
+        });
+      }, { threshold: 0.15 });
+      reveals.forEach(function (el) { io.observe(el); });
+    } else {
+      reveals.forEach(function (el) { el.classList.add("visible"); });
+    }
+
+    // Number the skill tags so they can appear one after another
+    document.querySelectorAll(".skills").forEach(function (list) {
+      list.querySelectorAll("li").forEach(function (li, i) { li.style.setProperty("--i", i); });
+    });
+
+    // Progress line at the top
+    var bar = document.getElementById("progress");
+    function updateBar() {
+      var max = document.documentElement.scrollHeight - window.innerHeight;
+      bar.style.transform = "scaleX(" + (max > 0 ? window.scrollY / max : 0) + ")";
+    }
+    window.addEventListener("scroll", updateBar, { passive: true });
+    updateBar();
+
+    // Highlight the menu link for the section you are in
+    var links = document.querySelectorAll("nav a");
+    if ("IntersectionObserver" in window) {
+      var navIo = new IntersectionObserver(function (entries) {
+        entries.forEach(function (e) {
+          if (e.isIntersecting) {
+            document.documentElement.setAttribute("data-theme", e.target.id);
+            links.forEach(function (a) {
+              a.classList.toggle("active", a.getAttribute("href") === "#" + e.target.id);
+            });
+          }
+        });
+      }, { rootMargin: "-40% 0px -55% 0px" });
+      document.querySelectorAll("main section").forEach(function (sec) { navIo.observe(sec); });
+
+      // Back at the top of the page: return to the first, calm color
+      var heroEl = document.querySelector(".hero");
+      new IntersectionObserver(function (entries) {
+        if (entries[0].isIntersecting) {
+          document.documentElement.setAttribute("data-theme", "hero");
+          links.forEach(function (a) { a.classList.remove("active"); });
+        }
+      }, { rootMargin: "-40% 0px -55% 0px" }).observe(heroEl);
+    }
+  </script>
 </body>
 </html>
